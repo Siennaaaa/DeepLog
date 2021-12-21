@@ -41,7 +41,7 @@ class Model(nn.Module):
 if __name__ == '__main__':
 
     # Hyperparameters
-    num_classes = 28
+    num_classes = 38
     input_size = 1
     model_path = 'model/Adam_batch_size=2048_epoch=300.pt'
     parser = argparse.ArgumentParser()
@@ -59,8 +59,8 @@ if __name__ == '__main__':
     model.load_state_dict(torch.load(model_path))
     model.eval()
     print('model_path: {}'.format(model_path))
-    test_normal_loader = generate('hdfs_test_normal')
-    test_abnormal_loader = generate('hdfs_test_abnormal')
+    test_normal_loader = generate('hdfs_test_normal_meting.txt')
+    test_abnormal_loader = generate('hdfs_test_abnormal_meting.txt')
     TP = 0
     FP = 0
     # Test the model

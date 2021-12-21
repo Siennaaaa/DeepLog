@@ -17,6 +17,7 @@ def generate(name):
     outputs = []
     with open('data/' + name, 'r') as f:
         for line in f.readlines():
+            print(line)
             num_sessions += 1
             line = tuple(map(lambda n: n - 1, map(int, line.strip().split())))
             for i in range(len(line) - window_size):
@@ -47,7 +48,7 @@ class Model(nn.Module):
 if __name__ == '__main__':
 
     # Hyperparameters
-    num_classes = 28
+    num_classes = 38 # your templates num
     num_epochs = 300
     batch_size = 2048
     input_size = 1
@@ -63,7 +64,7 @@ if __name__ == '__main__':
     window_size = args.window_size
 
     model = Model(input_size, hidden_size, num_layers, num_classes).to(device)
-    seq_dataset = generate('hdfs_train')
+    seq_dataset = generate('hdfs_train_meting.txt')
     dataloader = DataLoader(seq_dataset, batch_size=batch_size, shuffle=True, pin_memory=True)
     writer = SummaryWriter(log_dir='log/' + log)
 
